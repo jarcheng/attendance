@@ -54,10 +54,9 @@
 				const data = {
 					phoneNumber: this.phoneNumber,
 					password: md5(this.password),
-					code: this.code
 				}
 				uni.request({
-					url: taskUrl + "/user/signUp",
+					url: cwUrl + "/user/signUp",
 					method: 'POST',
 					data: data
 				}).then((res) => {
@@ -70,7 +69,7 @@
 							data: res.data.data.token,
 							success: function() {
 								uni.reLaunch({
-									url: '../index/index'
+									url: '../user/user'
 								})
 							}
 						})
@@ -92,6 +91,11 @@
 </script>
 
 <style lang="scss">
+	page {
+		background: linear-gradient(to bottom, #f06c7a 0%, #f06c7a 100%);
+		height: 100%;
+	}
+
 	.main {
 		height: 100vh;
 		width: 100vw;

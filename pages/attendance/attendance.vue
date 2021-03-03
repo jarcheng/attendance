@@ -5,7 +5,6 @@
 			<text class="info" :class="[resultCode==3?'green':'red']" v-if="resultCode==2||resultCode==3||resultCode==4">{{resultMap[resultCode]}}</text>
 			<text class="info green" v-if="isUploading">正在验证</text>
 			<text class="info red" v-if="resultCode==5">请先上传头像,再签到</text>
-			
 		</view>
 		<view class="camera-wrapper">
 			<camera class="camera" device-position="front" flash="off" @error="error"></camera>
@@ -120,8 +119,8 @@
 		justify-content: center;
 
 		.camera {
-			width: 400rpx;
-			height: 400rpx;
+			width: 500rpx;
+			height: 500rpx;
 			border-radius: 50%;
 		}
 	}
@@ -130,7 +129,7 @@
 		width: 100%;
 		display: flex;
 		justify-content: center;
-
+		margin-bottom: 50rpx;
 		.info {
 			font-size: 40rpx;
 			font-weight: bold;
