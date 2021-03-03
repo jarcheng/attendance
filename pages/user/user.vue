@@ -21,17 +21,17 @@
 			<view class="rear">MY SERVICE</view>
 		</view>
 		<view class="functions">
-			<view class="function" @click="switchPage('user-edit')">
-				<image class="icon" src="../../static/icon/myInfo.png"></image>
-				<button class="name" size="mini" plain="">我的信息</button>
-			</view>
 			<view class="function" @click="switchPage('../attendance/upload-face')">
-				<image class="icon" src="../../static/icon/upload.png"></image>
-				<button class="name" size="mini" plain="">上传头像</button>
+				<image class="icon" src="../../static/icon/face.png"></image>
+				<button class="name" size="mini" plain="">录入人脸</button>
 			</view>
 			<view class="function" @click="switchPage('../attendance/attendance')">
 				<image class="icon" src="../../static/icon/sign.png"></image>
 				<button class="name" size="mini" plain="">签到</button>
+			</view>
+			<view class="function" @click="switchPage('../attendance/attendance-list')">
+				<image class="icon" src="../../static/icon/calendar.png"></image>
+				<button class="name" size="mini" plain="">出勤情况</button>
 			</view>
 			<view class="function" @click="signOut" v-if="userInfo">
 				<image class="icon" src="../../static/icon/signOut.png"></image>

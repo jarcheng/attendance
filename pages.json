@@ -44,9 +44,25 @@
 				"navigationBarTitleText": "上传人脸",
 				"enablePullDownRefresh": false
 			}
-
+		},
+		{
+			"path": "pages/attendance/calendar",
+			"style": {
+				"navigationBarTitleText": "出勤日历",
+				"enablePullDownRefresh": false
+			}
+		
 		}
-	],
+	    ,{
+            "path" : "pages/attendance/attendance-list",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "出勤详情",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "考勤",

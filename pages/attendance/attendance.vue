@@ -2,7 +2,7 @@
 	<view>
 		<view class="title">
 			<text class="info" :class="[resultCode==1?'green':'red']" v-if="resultCode<2&&!isUploading">{{resultCode==1?'请上下点头并左右摇头':'未检测到人脸'}}</text>
-			<text class="info" :class="[resultCode==3?'green':'red']" v-if="resultCode==2||resultCode==3||resultCode==4">{{resultMap[resultCode]}}</text>
+			<text class="info" :class="[resultCode==3?'green':'red']" v-if="resultCode==2||resultCode==3||resultCode==4">{{resultCode==3?resultMap[resultCode]+":"+username:resultMap[resultCode]}}</text>
 			<text class="info green" v-if="isUploading">正在验证</text>
 			<text class="info red" v-if="resultCode==5">请先上传头像,再签到</text>
 		</view>
@@ -10,6 +10,8 @@
 			<camera class="camera" device-position="front" flash="off" @error="error"></camera>
 		</view>
 		<button type="primary" v-if="resultCode==2||resultCode==4" @click="rest">点击重试</button>
+		<u-toast ref="uToast" />
+
 	</view>
 </template>
 <script>
@@ -30,12 +32,15 @@
 					'3': '匹配成功',
 					'4': '动作不匹配'
 				},
+				faceUrl:"",
 				resultCode: 0,
 				timer: 0,
-				isUploading: false
+				isUploading: false,
+				username: "",
+				uid: ""
 			}
 		},
-		computed:{
+		computed: {
 			...mapState(['userInfo'])
 		},
 		onLoad() {
@@ -59,8 +64,10 @@
 												"url": this.getImgPath(url, false)
 											}
 										}).then(res => {
-											console.log(res[1].data)
-											this.resultCode = res[1].data
+											this.resultCode = res[1].data.code
+											if(this.resultCode==1){
+												this.faceUrl=this.getImgPath(url, false)
+											}
 										})
 									})
 								}
@@ -78,10 +85,15 @@
 												data: {
 													"url": this.getImgPath(url, false),
 													"pose": 3,
-													"id": this.userInfo.id
+													"face": this.faceUrl
 												}
 											}).then(res => {
-												this.resultCode = res[1].data
+												if (res[1].data.code == 3) {
+													this.username = res[1].data.data.username
+													this.uid = res[1].data.data.id
+													this.sign()
+												}
+												this.resultCode = res[1].data.code
 												this.isUploading = false
 												this.timer = 0
 											})
@@ -104,6 +116,18 @@
 				this.timer = 0
 				this.resultCode = 0
 				this.isUploading = false
+			},
+			sign() {
+				this.$http("/at-attendance/sign", "get", {
+					uid: this.uid
+				}).then(res => {
+					if (res.data.data == true) {
+						this.$refs.uToast.show({
+							title: '签到成功',
+							type: 'success',
+						})
+					}
+				})
 			},
 			error(e) {
 				console.log(e.detail);
@@ -130,6 +154,7 @@
 		display: flex;
 		justify-content: center;
 		margin-bottom: 50rpx;
+
 		.info {
 			font-size: 40rpx;
 			font-weight: bold;

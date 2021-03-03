@@ -3,7 +3,10 @@
 		<view class="camera-wrapper">
 			<camera class="camera" device-position="front" flash="off" @error="error"></camera>
 		</view>
-		<u-button @click="uploadFace">点击上传</u-button>
+		<view class="btn-wrapper">
+			<u-button class="btn" @click="uploadFace">点击上传</u-button>
+			
+		</view>
 	</view>
 </template>
 
@@ -62,5 +65,11 @@
 			height: 400rpx;
 			border-radius: 50%;
 		}
+	}
+	.btn-wrapper{
+		width: 100%;
+		margin-top: 100rpx;
+		display: flex;
+		justify-content: center;
 	}
 </style>
