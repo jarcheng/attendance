@@ -6,15 +6,15 @@
 		<view class="main">
 			<view class="center">
 				<view class="logo">
-					<image mode="widthFix" src="../../static/logo.jpg"></image>
+					<image mode="widthFix" src="../../static/logo.png"></image>
 				</view>
 				<view class="form">
-					<input placeholder="手机号" v-model="loginData.username" placeholder-style="color: rgba(255,255,255,0.8);" />
+					<input placeholder="用户名" v-model="loginData.username" placeholder-style="color: rgba(255,255,255,0.8);" />
 					<input placeholder="请输入密码" v-model="loginData.password" password=true placeholder-style="color: rgba(255,255,255,0.8);" />
 					<button class="btn" @tap="doLogin">登录</button>
-					<view class="res">
+<!-- 					<view class="res">
 						<view @tap="toReg">去注册</view>
-					</view>
+					</view> -->
 				</view>
 			</view>
 		</view>
@@ -31,9 +31,9 @@
 		data() {
 			return {
 				loginData: {
-					username: '游客',
+					username: 'admin',
 					phoneNumber: null,
-					password: '12345678'
+					password: ''
 				},
 			}
 		},
@@ -72,6 +72,7 @@
 								uni.reLaunch({
 									url: '../user/user'
 								})
+								this.$store.dispatch('getUserInfo')
 							}
 						})
 					} else {

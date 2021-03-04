@@ -21,6 +21,8 @@
 	import {
 		mapState
 	} from 'vuex'
+	import {pyUrl} from '@/utils/env.js'
+	
 	export default {
 		data() {
 			return {
@@ -58,7 +60,7 @@
 									upload(res.tempImagePath).then(res => {
 										const url = JSON.parse(res[1].data).data.url
 										uni.request({
-											url: 'http://192.168.31.112:5500/detect_face',
+											url: cwUrl+'/detect_face',
 											method: 'POST',
 											data: {
 												"url": this.getImgPath(url, false)
@@ -80,7 +82,7 @@
 										upload(res.tempVideoPath).then(res => {
 											const url = JSON.parse(res[1].data).data.url
 											uni.request({
-												url: 'http://192.168.31.112:5500/action',
+												url: cwUrl+'/action',
 												method: 'POST',
 												data: {
 													"url": this.getImgPath(url, false),
