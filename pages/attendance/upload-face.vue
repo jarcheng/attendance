@@ -6,7 +6,7 @@
 		<view class="submit">
 			<view class="exchange-form">
 				<u-input v-model="username" type="text" :placeholder-style="'text-align:center'" class="input" placeholder="请输入姓名"></u-input>
-				<u-button @click="uploadFace" class="btn" :custom-style="customStyle" type="primary">上传</u-button>
+				<u-button @click="doReg()" class="btn" :custom-style="customStyle" type="primary">上传</u-button>
 			</view>
 		</view>
 	</view>

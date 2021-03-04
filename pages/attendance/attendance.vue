@@ -59,14 +59,16 @@
 								success: (res) => {
 									upload(res.tempImagePath).then(res => {
 										const url = JSON.parse(res[1].data).data.url
+										
 										uni.request({
-											url: cwUrl+'/detect_face',
+											url:"http://192.168.31.112:5500/detect_face",
 											method: 'POST',
 											data: {
 												"url": this.getImgPath(url, false)
 											}
 										}).then(res => {
 											this.resultCode = res[1].data.code
+											
 											if(this.resultCode==1){
 												this.faceUrl=this.getImgPath(url, false)
 											}
@@ -82,7 +84,7 @@
 										upload(res.tempVideoPath).then(res => {
 											const url = JSON.parse(res[1].data).data.url
 											uni.request({
-												url: cwUrl+'/action',
+												url: 'http://192.168.31.112:5500/action',
 												method: 'POST',
 												data: {
 													"url": this.getImgPath(url, false),
